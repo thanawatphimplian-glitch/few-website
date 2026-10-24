@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AniList - แนะนำอนิเมะน่าดู</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<div class="top-right-search">
+    <input type="text" id="search" placeholder="ค้นหาอนิเมะ...">
+</div>
+
+<header>
+    <h1>AnimeList</h1>
+    <p class="subtitle">แนะนำอนิเมะน่าดู</p>
+</header>
+
+<main>
+    <section class="hero-carousel">
+        <div class="hero-slide-container" id="hero-slide-container">
+        </div>
+        <button class="carousel-arrow prev" id="hero-prev">&lt;</button>
+        <button class="carousel-arrow next" id="hero-next">&gt;</button>
+        <div class="carousel-dots" id="hero-dots"></div>
+    </section>
+
+    <div id="filters">
+        <button class="active" data-genre="all">ทั้งหมด</button>
+        <button data-genre="Action">Action</button>
+        <button data-genre="Fantasy">Fantasy</button>
+        <button data-genre="Comedy">Comedy</button>
+        <button data-genre="Romance">Romance</button>
+        <button data-genre="Sci-Fi">Sci-Fi</button>
+    </div>
+
+    <div id="anime-list"></div>
+</main>
+
+<div id="anime-modal" class="modal">
+    <div class="modal-content">
+        <button class="close-btn" aria-label="ปิด">&times;</button>
+        
+        <div class="modal-hero">
+            <img id="modal-img" src="" alt="Anime Cover">
+            <div class="hero-gradient"></div>
+            
+            <div class="hero-content">
+                <h2 id="modal-title"></h2>
+                <div class="meta-tags">
+                    <span id="modal-year" class="tag"></span>
+                    <span id="modal-age" class="tag tag-border">13+</span>
+                    <span class="tag tag-border">อนิเมะ</span>
+                    <span id="modal-genre-tag" class="tag"></span>
+                </div>
+            </div>
+        </div>
+
+        <div class="modal-details">
+            <p id="modal-desc" class="description"></p>
+        </div>
+    </div>
+</div>
+
+<script src="javascript.js"></script>
+</body>
+</html>
