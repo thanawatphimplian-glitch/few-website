@@ -1,0 +1,201 @@
+
+JAVA
+const animeData = [
+  {
+        title: "Fullmetal Alchemist: Brotherhood",
+        genres: ["Action", "Fantasy"],
+        rating: 9.1,
+        year: 2009,
+        description: "สองพี่น้องออกตามหาศิลาอาถรรพ์เพื่อฟื้นร่างกายที่สูญเสียไป"
+    },
+    {
+        title: "Spy x Family",
+        genres: ["Comedy", "Action"],
+        rating: 8.6,
+        year: 2022,
+        description: "สายลับ นักฆ่า และเด็กที่อ่านใจได้ มาเป็นครอบครัวปลอมๆ"
+    },
+    {
+        title: "Frieren: Beyond Journey's End",
+        genres: ["Fantasy"],
+        rating: 9.3,
+        year: 2023,
+        description: "เอลฟ์ผู้เป็นนักเวทย์เรียนรู้ความหมายของชีวิตหลังการผจญภัยสิ้นสุด"
+    }
+];
+
+const listElement = document.getElementById("anime-list");
+
+function showAnime(list) {
+    listElement.innerHTML = "";
+
+    list.forEach(function(anime) {
+        const card = document.createElement("div");
+        card.className = "card";
+        card.innerHTML = `
+            <h2>${anime.title}</h2>
+            <p class="meta">⭐ ${anime.rating} | ${anime.year}</p>
+            <p>${anime.description}</p>
+            <p class="genres">${anime.genres.join(", ")}</p>
+        `;
+        listElement.appendChild(card);
+    });
+}
+ 
+showAnime(animeData);
+
+const searchInput = document.getElementById("search");
+
+searchInput.addEventListener("input", function() {
+    const keyword = searchInput.value.toLowerCase();
+
+    const result = animeData.filter(function(anime) {
+        return anime.title.toLowerCase().includes(keyword);
+    });
+
+    showAnime(result);
+});
+
+const filterButtons = document.querySelectorAll("#filters button");
+
+filterButtons.forEach(function(button) {
+    button.addEventListener("click", function() {
+        const genre = button.dataset.genre;
+
+        filterButtons.forEach(function(b) {
+            b.classList.remove("active");
+        });
+        button.classList.add("active");
+
+        if (genre === "all") {
+            showAnime(animeData);
+        } else {
+            const result = animeData.filter(function(anime) {
+                return anime.genres.includes(genre);
+            });
+            showAnime(result);
+        }
+    });
+});
+
+html
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AniList</title>
+    <link rel="stylesheet" href="style.css">
+    
+</head>
+<body>
+<header>
+    <center>
+        <h1>AnimeList</h1>
+        <h3>แนะนำอนิเมะน่าดู</h3>
+    </center>
+</header>
+<main>
+    <input type="text" id="search" placeholder="ค้นหาอนิเมะ...">
+    <div id="filters">
+        <button data-genre="all">ทั้งหมด</button>
+        <button data-genre="Action">Action</button>
+        <button data-genre="Fantasy">Fantasy</button>
+        <button data-genre="Comedy">Comedy</button>
+    </div>
+
+    <div id="anime-list"></div>
+</main>
+    
+
+
+
+
+    <script src="javascript.js"></script>
+</body>
+</html>
+
+CSS
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: sans-serif;
+    background: #1a1a2e;
+    color: #eee;
+}
+
+header {
+    text-align: center;
+    padding: 40px 20px;
+}
+
+main {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 0 20px 40px;
+}
+
+#search {
+    width: 100%;
+    padding: 12px;
+    font-size: 16px;
+    border-radius: 8px;
+    border: none;
+    margin-bottom: 16px;
+}
+
+#filters {
+    display: flex;
+    gap: 8px;
+    flex-wrap: wrap;
+    margin-bottom: 24px;
+}
+
+#filters button {
+    padding: 8px 16px;
+    border: none;
+    border-radius: 20px;
+    background: #16213e;
+    color: #eee;
+    cursor: pointer;
+}
+
+#filters button:hover,
+#filters button.active {
+    background: #e94560;
+}
+
+#anime-list {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+    gap: 20px;
+}
+
+.card {
+    background: #16213e;
+    padding: 20px;
+    border-radius: 12px;
+    transition: transform 0.2s;
+}
+
+.card:hover {
+    transform: translateY(-5px);
+}
+
+.meta {
+    color: #e94560;
+    margin: 8px 0;
+}
+
+.genres {
+    margin-top: 12px;
+    font-size: 14px;
+    opacity: 0.7;
+}
+
+
+
